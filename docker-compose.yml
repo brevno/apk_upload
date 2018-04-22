@@ -1,0 +1,23 @@
+version: '2'
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: mysqlroot
+      MYSQL_DATABASE: apk_upload
+      MYSQL_USER: django
+      MYSQL_PASSWORD: djangopass
+  web:
+    build:
+      context: .
+      dockerfile: docker/web/Dockerfile
+    command: >
+      bash -c 'python manage.py migrate
+      && python manage.py runserver 0.0.0.0:8000'
+    ports:
+      - "8000:8000"
+    links:
+      - db:db
