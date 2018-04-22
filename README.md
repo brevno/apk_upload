@@ -27,7 +27,10 @@ virtualenv env
 pip install -r requirements txt
 python manage.py migrate
 ```
-
+### Run tests
+```
+python manage.py test
+```
 ## Installation using docker-compose
 
 
